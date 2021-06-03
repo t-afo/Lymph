@@ -1,0 +1,5 @@
+import numpy as np
+import scipy as sp
+import script1
+
+ff = script1.minimiserval(script1.fp1)

@@ -1,0 +1,28 @@
+clear
+clc
+%% For positive pressure
+Dn = csvread('Dalln200positive.csv');
+Qn = csvread('Qalln100pe.csv');
+pn = csvread('palln100pe.csv');
+Rvn = csvread('Rvalln100pe.csv');
+tn = csvread('timen100pe.csv')';
+
+N = 4;
+pa = 2275;
+pb = 2575;
+pe = 2375;
+
+pan = pa * ones(1,length(pn));
+pbn = pb * ones(1,length(pn));
+
+%removing repeats
+Qn = [Qn(1:N,:); Qn(2*N,:)];
+Rvn = [Rvn(1:N,:); Rvn(2*N,:)];
+pn = [pn(1:N,:);pbn;pan;pn(N+1:2*N,:)];
+
+%arranging
+for i = 1:N+1
+    deltapn(i,:) = pn(N+1+i,:) - pn(i,:);   
+end
+
+deltapn = deltapn(:,1:end);
